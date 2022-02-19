@@ -22,3 +22,5 @@
 
 -dontwarn com.unionpay.**
 -keep com.unionpay.** {*;}
+-dontwarn com.huawei.**
+-keep class com.huawei.** {*;}

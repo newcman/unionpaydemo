@@ -1,11 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
+
     defaultConfig {
         applicationId "com.unionpay.uppayplugin.demo"
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -24,7 +26,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation files('libs/UPPayAssistEx.jar')
-    implementation files('libs/UPPayPluginExPro.jar')
+//    implementation files('libs/UPPayPluginExPro.jar')
 }
