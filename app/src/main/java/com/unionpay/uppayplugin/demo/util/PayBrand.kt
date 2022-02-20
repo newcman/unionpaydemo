@@ -81,43 +81,22 @@ class PayBrand {
 
 
         fun getSeType(): String {
-            val brand = android.os.Build.BOARD
+            val brand = android.os.Build.BRAND
             Log.d(TAG, "getSeType $brand")
-            if (brand.contains(PHONE_SAMSUNG, true)) {
-                return SE_SAMSUNG
+            return when {
+                brand.contains(PHONE_SAMSUNG, true) -> SE_SAMSUNG
+                brand.contains(PHONE_HUAWEI, true) -> SE_HUAWEI
+                brand.contains(PHONE_HONOR, true) -> SE_HUAWEI
+                brand.contains(PHONE_MEIZU, true) -> SE_MEIZU
+                brand.contains(PHONE_XIAOMI, true) -> SE_XIAOMI
+                brand.contains(PHONE_OPPO, true) -> SE_OPPO
+                brand.contains(PHONE_VIVO, true) -> SE_VIVO
+                brand.contains(PHONE_SMARTISAN, true) -> SE_SMARTISAN
+                brand.contains(PHONE_REALME, true) -> SE_REALME
+                brand.contains(PHONE_ONEPLUS, true) -> SE_ONEPLUS
+                brand.contains(PHONE_LE, true) -> SE_LE
+                else -> ""
             }
-            if (brand.contains(PHONE_HUAWEI, true)) {
-                return SE_HUAWEI
-            }
-            if (brand.contains(PHONE_HONOR, true)) {
-                return SE_HUAWEI
-            }
-            if (brand.contains(PHONE_MEIZU, true)) {
-                return SE_MEIZU
-            }
-            if (brand.contains(PHONE_LE, true)) {
-                return SE_LE
-            }
-            if (brand.contains(PHONE_XIAOMI, true)) {
-                return SE_XIAOMI
-            }
-            if (brand.contains(PHONE_OPPO, true)) {
-                return SE_OPPO
-            }
-            if (brand.contains(PHONE_VIVO, true)) {
-                return SE_VIVO
-            }
-            if (brand.contains(PHONE_SMARTISAN, true)) {
-                return SE_SMARTISAN
-            }
-            if (brand.contains(PHONE_REALME, true)) {
-                return SE_REALME
-            }
-
-            if (brand.contains(PHONE_ONEPLUS, true)) {
-                return SE_ONEPLUS
-            }
-            return ""
         }
     }
 }

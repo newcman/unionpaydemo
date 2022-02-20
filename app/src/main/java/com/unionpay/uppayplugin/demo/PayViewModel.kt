@@ -40,8 +40,6 @@ import java.util.*
 /**
  * 支付viewmodel
  */
-
-
 class PayViewModel : ViewModel() {
     companion object {
         private const val TAG = "PayViewModel"
@@ -49,8 +47,8 @@ class PayViewModel : ViewModel() {
 
     val loadingLiveData: MutableLiveData<Boolean> = MutableLiveData(false)
     val pageLiveData: MutableLiveData<Int> = MutableLiveData(0)
-    private lateinit var retrofit: Retrofit
-    private lateinit var api: IOrderApi
+    private var retrofit: Retrofit
+    private var api: IOrderApi
     private val mSimpleDateFormat = SimpleDateFormat("yyyyMMddHHmmss")
     var orderRes: OrderRes? = null
     var orderReq: OrderReq? = null
@@ -82,6 +80,9 @@ class PayViewModel : ViewModel() {
      */
     fun pay(context: Context, orderReq: OrderReq, env: String) {
         orderRes = null
+
+        val setype = PayBrand.getSeType()
+        Log.d(TAG, "setype $setype")
         this.orderReq = orderReq
         viewModelScope.launch {
             loadingLiveData.value = true
