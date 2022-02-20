@@ -125,7 +125,7 @@ class PayViewModel : ViewModel() {
 
     /**
      */
-    private suspend fun startPay(
+    private fun startPay(
         context: Context,
         tn: String,
         env: String,

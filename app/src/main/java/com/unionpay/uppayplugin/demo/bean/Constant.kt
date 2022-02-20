@@ -14,8 +14,8 @@ class Constant {
         const val MERCHANT_NO_PRODUCT = "2218120000751"
 
         // 环境
-        const val ENV_TEST = "00"
-        const val ENV_PRODUCT  = "01"
+        const val ENV_TEST = "01"
+        const val ENV_PRODUCT  = "00"
 
         const val RESULT_OK = "0000"
 
