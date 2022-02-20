@@ -3,6 +3,7 @@ package com.unionpay.uppayplugin.demo.ui
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,11 @@ import java.lang.Exception
  */
 class PayFragment : Fragment() {
     private var mLoadingDialog: ProgressDialog? = null
-    private var mViewModel: PayViewModel? = null
+    private val mViewModel: PayViewModel by lazy {
+        ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
+            PayViewModel::class.java
+        )
+    }
     private var aggregateModel = MODEL_NORMAL // 聚合模式：01-标准模式；02-直通模式
     private var env = ENV_TEST // 环境
 
@@ -48,10 +53,8 @@ class PayFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mViewModel =
-            ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
-                PayViewModel::class.java
-            )
+
+        Log.d("mViewModel", "mViewModel $mViewModel")
         initViewModel()
         initView()
     }

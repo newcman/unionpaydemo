@@ -2,6 +2,7 @@ package com.unionpay.uppayplugin.demo
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -9,20 +10,19 @@ import com.unionpay.uppayplugin.demo.bean.Constant.Companion.PAGE_PAY
 import com.unionpay.uppayplugin.demo.bean.Constant.Companion.PAGE_PAY_RESULT
 import com.unionpay.uppayplugin.demo.ui.PayFragment
 import com.unionpay.uppayplugin.demo.ui.PayResultFragment
-import org.json.JSONException
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
-    private var mViewModel: PayViewModel? = null
+    private val mViewModel: PayViewModel by lazy {
+        ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(PayViewModel::class.java)
+    }
     private var mPayFragment: PayFragment? = null
     private var mPayResultFragment: PayResultFragment? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        mViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(PayViewModel::class.java)
         if (savedInstanceState == null) {
             mPayFragment = PayFragment.newInstance()
             supportFragmentManager.beginTransaction()
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
                 .commitNow()
         }
 
+        Log.d("mViewModel", "mViewModel $mViewModel")
         initViewModel()
     }
 

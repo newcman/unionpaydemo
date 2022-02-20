@@ -1,6 +1,7 @@
 package com.unionpay.uppayplugin.demo.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,11 @@ import kotlinx.android.synthetic.main.pay_result_fragment.*
  * 支付结果界面
  */
 class PayResultFragment : Fragment() {
-    private var mViewModel: PayViewModel? = null
+    private val mViewModel: PayViewModel by lazy {
+        ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
+            PayViewModel::class.java
+        )
+    }
 
     companion object {
         fun newInstance(): PayResultFragment {
@@ -32,19 +37,16 @@ class PayResultFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mViewModel =
-            ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
-                PayViewModel::class.java
-            )
+        Log.d("mViewModel", "mViewModel $mViewModel")
         initView()
     }
 
     private fun initView() {
         bt_back.setOnClickListener {
-            mViewModel?.back()
+            mViewModel.back()
         }
 
-        mViewModel?.apply {
+        mViewModel.apply {
             when (payResult) {
                 Constant.PAY_SUCCESS -> {
                     iv_pay_result.setImageResource(R.mipmap.icon_pay_ok)
