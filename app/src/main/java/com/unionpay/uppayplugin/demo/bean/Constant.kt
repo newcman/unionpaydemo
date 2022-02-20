@@ -17,11 +17,11 @@ class Constant {
         const val ENV_TEST = "00"
         const val ENV_PRODUCT  = "01"
 
-        const val RESULT_OK = "0"
+        const val RESULT_OK = "0000"
 
         // 支付结果
         const val PAY_SUCCESS = 1
         const val PAY_FAILED = 2
-        const val PAY_CANCEL = 2
+        const val PAY_CANCEL = 3
     }
 }

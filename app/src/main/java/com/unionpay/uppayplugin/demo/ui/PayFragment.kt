@@ -157,7 +157,7 @@ class PayFragment : Fragment() {
             orderReq.aggregateModel = aggregateModel
             orderReq.amount = amount
             orderReq.ebankEnAbbr = ebankEnAbbr
-            orderReq.ebankType = "02"
+            orderReq.ebankType = "03"
             orderReq.merchOrderNo = "${System.currentTimeMillis()}"
             orderReq.merchantNo = merchantNo
             orderReq.requestNo = "${System.currentTimeMillis()}"

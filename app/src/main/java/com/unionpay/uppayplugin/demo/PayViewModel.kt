@@ -91,7 +91,7 @@ class PayViewModel : ViewModel() {
                 resultData = makeOrder(orderReq)
                 loadingLiveData.value = false
                 Log.d(TAG, "resultData $resultData")
-                if (resultData?.code != RESULT_OK) {
+                if (RESULT_OK != resultData?.code) {
                     Toast.makeText(context, "下单失败：${resultData?.msg}", Toast.LENGTH_LONG).show()
                     return@launch
                 }
