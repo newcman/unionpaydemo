@@ -7,4 +7,15 @@
     <string name="jar">银联sdk接入</string>
     <string name="payBYAPK">APK接入</string>
     <string name="payBYJAR">JAR接入</string>
+
+    <string-array name="sp_envs">
+        <item>测试环境</item>
+        <item>开发环境</item>
+        <item>生产环境</item>
+    </string-array>
+
+    <string-array name="sp_mode">
+        <item>标准模式</item>
+        <item>直通模式</item>
+    </string-array>
 </resources>
