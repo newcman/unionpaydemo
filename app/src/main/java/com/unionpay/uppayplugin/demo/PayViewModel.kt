@@ -64,7 +64,7 @@ class PayViewModel : ViewModel() {
             TrustAllSSLSocketFactory.TrustAllCertsManager()
         )
         retrofit = Retrofit.Builder()
-            .baseUrl("https://openapi.t.payeco.com")
+            .baseUrl("https://openapi.payeco.com")
             .client(okHttpClient.build())
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))//使用rxjava是加上这一句
