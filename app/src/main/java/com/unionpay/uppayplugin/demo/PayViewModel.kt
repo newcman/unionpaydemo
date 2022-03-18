@@ -141,13 +141,14 @@ class PayViewModel : ViewModel() {
          * mode —— 银联后台环境标识，“00”将在银联正式环境发起交易,“01”将在银联测试环境发起
          * 交易seType —— 手机pay支付类别，见表1
          */
-        if (aggregateModel == MODEL_NORMAL) { // 普通模式
-            return UPPayAssistEx.startPay(context, null, null, tn, env)
-        } else {
-            val setype = PayBrand.getSeType()
-            Log.d(TAG, "setype $setype")
-            return UPPayAssistEx.startSEPay(context, null, null, tn, env, setype)
-        }
+        return UPPayAssistEx.startPay(context, null, null, tn, env)
+//        if (aggregateModel == MODEL_NORMAL) { // 普通模式
+//            return UPPayAssistEx.startPay(context, null, null, tn, env)
+//        } else {
+//            val setype = PayBrand.getSeType()
+//            Log.d(TAG, "setype $setype")
+//            return UPPayAssistEx.startSEPay(context, null, null, tn, env, setype)
+//        }
     }
 
 
