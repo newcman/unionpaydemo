@@ -1,4 +1,4 @@
-package com.unionpay.uppayplugin.demo.ui
+package com.unionpay.demo.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.unionpay.uppayplugin.demo.PayViewModel
-import com.unionpay.uppayplugin.demo.R
-import com.unionpay.uppayplugin.demo.bean.Constant
+import com.unionpay.demo.PayViewModel
+import com.unionpay.demo.R
+import com.unionpay.demo.bean.Constant
 import kotlinx.android.synthetic.main.pay_result_fragment.*
 
 /**

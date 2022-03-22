@@ -1,4 +1,4 @@
-package com.unionpay.uppayplugin.demo;
+package com.unionpay.demo;
 
 import android.app.Activity;
 import android.widget.TextView;

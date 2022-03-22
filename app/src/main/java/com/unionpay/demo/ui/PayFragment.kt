@@ -1,4 +1,4 @@
-package com.unionpay.uppayplugin.demo.ui
+package com.unionpay.demo.ui
 
 import android.app.ProgressDialog
 import android.os.Bundle
@@ -12,15 +12,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.unionpay.uppayplugin.demo.PayViewModel
-import com.unionpay.uppayplugin.demo.R
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.ENV_PRODUCT
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.ENV_TEST
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.MERCHANT_NO_PRODUCT
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.MERCHANT_NO_TEST
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.MODEL_DIREC
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.MODEL_NORMAL
-import com.unionpay.uppayplugin.demo.bean.OrderReq
+import com.unionpay.demo.PayViewModel
+import com.unionpay.demo.R
+import com.unionpay.demo.bean.Constant.Companion.ENV_PRODUCT
+import com.unionpay.demo.bean.Constant.Companion.ENV_TEST
+import com.unionpay.demo.bean.Constant.Companion.MERCHANT_NO_PRODUCT
+import com.unionpay.demo.bean.Constant.Companion.MERCHANT_NO_TEST
+import com.unionpay.demo.bean.Constant.Companion.MODEL_DIREC
+import com.unionpay.demo.bean.Constant.Companion.MODEL_NORMAL
+import com.unionpay.demo.bean.OrderReq
 import kotlinx.android.synthetic.main.pay_fragment.*
 import java.lang.Exception
 

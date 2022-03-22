@@ -1,4 +1,4 @@
-package com.unionpay.uppayplugin.demo.bean
+package com.unionpay.demo.bean
 
 /**
  * 订单请求

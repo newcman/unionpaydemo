@@ -1,4 +1,4 @@
-package com.unionpay.uppayplugin.demo
+package com.unionpay.demo
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,10 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.PAGE_PAY
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.PAGE_PAY_RESULT
-import com.unionpay.uppayplugin.demo.ui.PayFragment
-import com.unionpay.uppayplugin.demo.ui.PayResultFragment
+import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY
+import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY_RESULT
+import com.unionpay.demo.ui.PayFragment
+import com.unionpay.demo.ui.PayResultFragment
 
 class MainActivity : AppCompatActivity() {
     private val mViewModel: PayViewModel by lazy {

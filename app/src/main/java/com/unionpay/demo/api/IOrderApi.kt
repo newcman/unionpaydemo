@@ -1,7 +1,7 @@
-package com.unionpay.uppayplugin.demo.api
+package com.unionpay.demo.api
 
-import com.unionpay.uppayplugin.demo.bean.OrderRes
-import com.unionpay.uppayplugin.demo.bean.ResultData
+import com.unionpay.demo.bean.OrderRes
+import com.unionpay.demo.bean.ResultData
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.POST

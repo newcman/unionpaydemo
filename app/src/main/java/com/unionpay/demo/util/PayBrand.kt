@@ -1,4 +1,4 @@
-package com.unionpay.uppayplugin.demo.util
+package com.unionpay.demo.util
 
 import android.util.Log
 

@@ -1,4 +1,4 @@
-package com.unionpay.uppayplugin.demo.ssl
+package com.unionpay.demo.ssl
 
 import android.annotation.SuppressLint
 import java.security.cert.X509Certificate

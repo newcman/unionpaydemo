@@ -1,4 +1,4 @@
-package com.unionpay.uppayplugin.demo
+package com.unionpay.demo
 
 import android.content.Context
 import android.content.Intent
@@ -10,19 +10,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.unionpay.UPPayAssistEx
-import com.unionpay.uppayplugin.demo.api.IOrderApi
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.MODEL_NORMAL
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.PAGE_PAY
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.PAGE_PAY_RESULT
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.PAY_CANCEL
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.PAY_FAILED
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.PAY_SUCCESS
-import com.unionpay.uppayplugin.demo.bean.Constant.Companion.RESULT_OK
-import com.unionpay.uppayplugin.demo.bean.OrderReq
-import com.unionpay.uppayplugin.demo.bean.OrderRes
-import com.unionpay.uppayplugin.demo.bean.ResultData
-import com.unionpay.uppayplugin.demo.ssl.TrustAllSSLSocketFactory
-import com.unionpay.uppayplugin.demo.util.PayBrand
+import com.unionpay.demo.api.IOrderApi
+import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY
+import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY_RESULT
+import com.unionpay.demo.bean.Constant.Companion.PAY_CANCEL
+import com.unionpay.demo.bean.Constant.Companion.PAY_FAILED
+import com.unionpay.demo.bean.Constant.Companion.PAY_SUCCESS
+import com.unionpay.demo.bean.Constant.Companion.RESULT_OK
+import com.unionpay.demo.bean.OrderReq
+import com.unionpay.demo.bean.OrderRes
+import com.unionpay.demo.bean.ResultData
+import com.unionpay.demo.ssl.TrustAllSSLSocketFactory
+import com.unionpay.demo.util.PayBrand
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
