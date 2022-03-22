@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/bt_union_pay"
         android:layout_width="match_parent"
-        android:text="银联统一收银台支付Demo"
-        android:textColor="#000000"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
+        android:text="银联统一收银台支付"
+        android:textColor="#000000"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="50dp"
-        android:layout_height="wrap_content"/>
-    <FrameLayout
-        android:id="@+id/container"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/bt_wx_pay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="跳转支付-微信OpenSDK"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

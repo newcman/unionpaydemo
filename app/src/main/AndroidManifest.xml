@@ -36,6 +36,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".UnionPayActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".WXPayActivity"
+            android:screenOrientation="portrait"/>
 <!--        <activity-->
 <!--            android:name=".JARActivity"-->
 <!--            android:label="@string/jar">-->
