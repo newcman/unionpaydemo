@@ -30,14 +30,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 环境:"
+                android:text="后台地址:"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </LinearLayout>
 
         <Spinner
             android:id="@+id/sp_env"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
+            android:gravity="right"
             android:layout_height="wrap_content"
             android:entries="@array/sp_envs"
             android:spinnerMode="dropdown"
@@ -64,7 +65,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 商户号:"
+                android:text="易联商户号:"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -73,6 +74,7 @@
             android:id="@+id/tv_merchant_id"
             android:layout_width="200dp"
             android:singleLine="true"
+            android:gravity="right"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true" />
     </RelativeLayout>
@@ -97,7 +99,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 订单金额:"
+                android:text="订单金额(元):"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -105,6 +107,8 @@
         <EditText
             android:id="@+id/tv_order_amount"
             android:layout_width="200dp"
+            android:text="0.01"
+            android:gravity="right"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:inputType="numberDecimal"
@@ -130,16 +134,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 聚合模式:"
+                android:text=" 订单描述:"
                 android:textColor="#000000"
                 android:textSize="16sp" />
         </LinearLayout>
 
-        <Spinner
-            android:id="@+id/sp_mode"
+        <EditText
+            android:singleLine="true"
+            android:id="@+id/tv_order_desc"
             android:layout_width="200dp"
-            android:entries="@array/sp_mode"
-            android:spinnerMode="dropdown"
+            android:maxLength="10"
+            android:gravity="right"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true" />
     </RelativeLayout>
@@ -153,25 +158,26 @@
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" 直通银行标识:"
+            android:text=" 小程序版本:"
             android:textColor="#000000"
             android:textSize="16sp" />
 
-        <EditText
-            android:singleLine="true"
-            android:id="@+id/tv_bank_index"
-            android:layout_width="200dp"
-            android:maxLength="10"
+        <Spinner
+            android:id="@+id/sp_applets_version"
+            android:layout_width="wrap_content"
+            android:entries="@array/sp_applets_version"
+            android:spinnerMode="dropdown"
+            android:gravity="right"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true" />
     </RelativeLayout>
 
     <Button
-        android:id="@+id/bt_pay"
+        android:id="@+id/bt_make_order"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="支付" />
+        android:text="确认下单" />
 
 </LinearLayout>

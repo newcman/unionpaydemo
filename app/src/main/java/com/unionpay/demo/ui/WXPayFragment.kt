@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,7 @@ import com.unionpay.demo.bean.Constant.Companion.MERCHANT_NO_TEST
 import com.unionpay.demo.bean.Constant.Companion.MODEL_DIREC
 import com.unionpay.demo.bean.Constant.Companion.MODEL_NORMAL
 import com.unionpay.demo.bean.OrderReq
-import kotlinx.android.synthetic.main.pay_fragment.*
+import kotlinx.android.synthetic.main.wx_pay_fragment.*
 import java.lang.Exception
 
 /**
@@ -102,8 +103,9 @@ class WXPayFragment : Fragment() {
             }
         }
 
-        //  聚合模式
-        sp_mode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        sp_applets_version.setSelection(1)
+        // 小程序版本
+        sp_applets_version.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -124,7 +126,7 @@ class WXPayFragment : Fragment() {
 
         }
 
-        bt_pay.setOnClickListener {
+        bt_make_order.setOnClickListener {
             val merchantNo = tv_merchant_id.text.toString().trim()
             if (TextUtils.isEmpty(merchantNo)) {
                 Toast.makeText(context, "请输入商户号", Toast.LENGTH_LONG).show()
@@ -146,17 +148,17 @@ class WXPayFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            var ebankEnAbbr = tv_bank_index.text.toString().trim()
-
-            if (aggregateModel == MODEL_DIREC && TextUtils.isEmpty(ebankEnAbbr)) {
-                Toast.makeText(context, "直通模式下请输入直播银行标识", Toast.LENGTH_LONG).show()
+            var orderDesc = tv_order_desc.text.toString().trim()
+            if (TextUtils.isEmpty(orderDesc)) {
+                Toast.makeText(context, "请输入订单描述", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
+
 
             val orderReq = OrderReq()
             orderReq.aggregateModel = aggregateModel
             orderReq.amount = amount
-            orderReq.ebankEnAbbr = ebankEnAbbr
+//            orderReq.ebankEnAbbr = ebankEnAbbr
             orderReq.ebankType = "02"
             orderReq.merchOrderNo = "${System.currentTimeMillis()}"
             orderReq.merchantNo = merchantNo

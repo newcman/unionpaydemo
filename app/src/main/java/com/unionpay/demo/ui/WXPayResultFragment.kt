@@ -5,12 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.unionpay.demo.PayViewModel
 import com.unionpay.demo.R
 import com.unionpay.demo.bean.Constant
 import kotlinx.android.synthetic.main.pay_result_fragment.*
+import kotlinx.android.synthetic.main.pay_result_fragment.bt_back
+import kotlinx.android.synthetic.main.pay_result_fragment.iv_pay_result
+import kotlinx.android.synthetic.main.pay_result_fragment.tv_merchant_order_id
+import kotlinx.android.synthetic.main.pay_result_fragment.tv_order_amount
+import kotlinx.android.synthetic.main.pay_result_fragment.tv_pay_result
+import kotlinx.android.synthetic.main.wx_pay_result_fragment.*
 
 /**
  * 支付结果界面
@@ -44,6 +51,14 @@ class WXPayResultFragment : Fragment() {
     private fun initView() {
         bt_back.setOnClickListener {
             mViewModel.back()
+        }
+
+        tv_copy_merchant_order_id.setOnClickListener {
+            Toast.makeText(context, "复制成功", Toast.LENGTH_LONG).show()
+        }
+
+        tv_copy_yilian_orderr_id.setOnClickListener {
+            Toast.makeText(context, "复制成功", Toast.LENGTH_LONG).show()
         }
 
         mViewModel.apply {

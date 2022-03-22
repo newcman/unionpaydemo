@@ -18,4 +18,9 @@
         <item>标准模式</item>
         <item>直通模式</item>
     </string-array>
+    <string-array name="sp_applets_version">
+        <item>开发版本</item>
+        <item>体验版</item>
+        <item>正式版</item>
+    </string-array>
 </resources>
