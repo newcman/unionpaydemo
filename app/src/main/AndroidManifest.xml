@@ -41,6 +41,14 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".WXPayActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="true"
+            android:taskAffinity="com.unionpay.demo"
+            android:launchMode="singleTask">
+        </activity>
 <!--        <activity-->
 <!--            android:name=".JARActivity"-->
 <!--            android:label="@string/jar">-->

@@ -4,7 +4,6 @@ import android.app.ProgressDialog
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,29 +12,28 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.unionpay.demo.PayViewModel
+import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram
 import com.unionpay.demo.R
+import com.unionpay.demo.WXPayViewModel
 import com.unionpay.demo.bean.Constant.Companion.ENV_PRODUCT
 import com.unionpay.demo.bean.Constant.Companion.ENV_TEST
 import com.unionpay.demo.bean.Constant.Companion.MERCHANT_NO_PRODUCT
 import com.unionpay.demo.bean.Constant.Companion.MERCHANT_NO_TEST
-import com.unionpay.demo.bean.Constant.Companion.MODEL_DIREC
-import com.unionpay.demo.bean.Constant.Companion.MODEL_NORMAL
 import com.unionpay.demo.bean.OrderReq
 import kotlinx.android.synthetic.main.wx_pay_fragment.*
-import java.lang.Exception
 
 /**
  * 支付界面
  */
 class WXPayFragment : Fragment() {
     private var mLoadingDialog: ProgressDialog? = null
-    private val mViewModel: PayViewModel by lazy {
+    private val mViewModel: WXPayViewModel by lazy {
         ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
-            PayViewModel::class.java
+            WXPayViewModel::class.java
         )
     }
-    private var aggregateModel = MODEL_NORMAL // 聚合模式：01-标准模式；02-直通模式
+    private var miniprogramType =
+        WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_PREVIEW // 聚合模式：01-标准模式；02-直通模式
     private var env = ENV_TEST // 环境
 
     companion object {
@@ -113,8 +111,9 @@ class WXPayFragment : Fragment() {
                 id: Long
             ) {
                 when (position) {
-                    0 -> aggregateModel = MODEL_NORMAL
-                    1 -> aggregateModel = MODEL_DIREC
+                    0 -> miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_TEST
+                    1 -> miniprogramType = WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_PREVIEW
+                    2 -> miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE
                     else -> {
 
                     }
@@ -156,7 +155,7 @@ class WXPayFragment : Fragment() {
 
 
             val orderReq = OrderReq()
-            orderReq.aggregateModel = aggregateModel
+//            orderReq.aggregateModel = aggregateModel
             orderReq.amount = amount
 //            orderReq.ebankEnAbbr = ebankEnAbbr
             orderReq.ebankType = "02"

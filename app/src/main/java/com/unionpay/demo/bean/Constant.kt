@@ -23,5 +23,9 @@ class Constant {
         const val PAY_SUCCESS = 1
         const val PAY_FAILED = 2
         const val PAY_CANCEL = 3
+
+
+
+        const val WX_APP_ID = ""
     }
 }
