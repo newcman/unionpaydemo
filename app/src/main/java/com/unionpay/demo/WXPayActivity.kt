@@ -8,8 +8,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY
 import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY_RESULT
-import com.unionpay.demo.ui.PayFragment
-import com.unionpay.demo.ui.PayResultFragment
 import com.unionpay.demo.ui.WXPayFragment
 import com.unionpay.demo.ui.WXPayResultFragment
 

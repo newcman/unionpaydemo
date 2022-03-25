@@ -9,25 +9,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.tencent.mm.opensdk.constants.ConstantsAPI
-import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
-import com.unionpay.UPPayAssistEx
 import com.unionpay.demo.api.IOrderApi
+import com.unionpay.demo.bean.*
 import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY
 import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY_RESULT
 import com.unionpay.demo.bean.Constant.Companion.PAY_CANCEL
 import com.unionpay.demo.bean.Constant.Companion.PAY_FAILED
 import com.unionpay.demo.bean.Constant.Companion.PAY_SUCCESS
 import com.unionpay.demo.bean.Constant.Companion.RESULT_OK
-import com.unionpay.demo.bean.OrderReq
-import com.unionpay.demo.bean.OrderRes
-import com.unionpay.demo.bean.ResultData
 import com.unionpay.demo.ssl.TrustAllSSLSocketFactory
-import com.unionpay.demo.util.PayBrand
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
@@ -54,13 +47,9 @@ class WXPayViewModel : ViewModel() {
     private var retrofit: Retrofit
     private var api: IOrderApi
     private val mSimpleDateFormat = SimpleDateFormat("yyyyMMddHHmmss")
-    var orderRes: OrderRes? = null
-    var orderReq: OrderReq? = null
+    var orderRes: MPCashierApplyRes? = null
+    var orderReq: MPCashierApplyReq? = null
     var payResult = PAY_SUCCESS
-
-    val handler = CoroutineExceptionHandler { context, exception ->
-        Log.e(TAG, "error $exception")
-    }
 
     init {
         val okHttpClient = OkHttpClient.Builder().sslSocketFactory(
@@ -77,20 +66,13 @@ class WXPayViewModel : ViewModel() {
     }
 
     /**
-     * 支付
-     * 1、生成订单，获取到TN
-     * 2、调用支付界面
-     * 3、处理支付结果
      */
-    fun pay(context: Context, orderReq: OrderReq, env: String) {
+    fun pay(context: Context, orderReq: MPCashierApplyReq, miniprogramType: Int) {
         orderRes = null
-
-        val setype = PayBrand.getSeType()
-        Log.d(TAG, "setype $setype")
         this.orderReq = orderReq
         viewModelScope.launch {
             loadingLiveData.value = true
-            var resultData: ResultData<OrderRes>?
+            var resultData: ResultData<MPCashierApplyRes>?
             try {
                 resultData = makeOrder(orderReq)
                 loadingLiveData.value = false
@@ -106,53 +88,35 @@ class WXPayViewModel : ViewModel() {
                 return@launch
             }
             orderRes = resultData.data
-            val tn = orderRes?.tn
-            if (TextUtils.isEmpty(tn)) {
-                Toast.makeText(context, "获取到的tn为空", Toast.LENGTH_LONG).show()
+            val url = orderRes?.url
+            if (TextUtils.isEmpty(url)) {
+                Toast.makeText(context, "获取到的url为空", Toast.LENGTH_LONG).show()
                 return@launch
             }
-            startPay(context, tn!!, env, orderReq.aggregateModel)
+//            jumpWxApplet(context, url!!, miniprogramType)
+
+            val queryReq = QueryPayOrderReq()
+            queryReq.merchant_no = orderReq.merchant_no
+            queryReq.mer_order_no = orderReq.merch_order_no
+            queryReq.request_no = "${System.currentTimeMillis()}"
+            val queryResult = queryOrder(queryReq)
+            Log.d(TAG, "queryResult $queryResult")
+            payResult = queryResult.data?.pay_status ?: PAY_SUCCESS
+            pageLiveData.value = PAGE_PAY_RESULT
+
         }
     }
 
 
-    private suspend fun makeOrder(orderReq: OrderReq): ResultData<OrderRes> {
+    private suspend fun makeOrder(orderReq: MPCashierApplyReq): ResultData<MPCashierApplyRes> {
         Log.d(TAG, "makeOrder $orderReq")
         val json: MediaType = MediaType.parse("application/json; charset=utf-8")!!
-        orderReq.requestTime = mSimpleDateFormat.format(Date())
+        orderReq.request_time = mSimpleDateFormat.format(Date())
         val gson = Gson()
         val orderJson = gson.toJson(orderReq)
         Log.d(TAG, "orderJson $orderJson")
         val body = RequestBody.create(json, orderJson)
-        return api.makeOrder(body)
-    }
-
-    /**
-     */
-    private fun startPay(
-        context: Context,
-        tn: String,
-        env: String,
-        aggregateModel: String
-    ): Int {
-        Log.d(TAG, "startPay tn=$tn env=$env aggregateModel=$aggregateModel")
-
-        /**
-         * 参数说明： context —— 用于获取启动支付控件的活动对象的context
-         * spId —— 保留使用，这里输入null
-         * sysProvider —— 保留使用，这里输入null
-         * orderInfo —— 订单信息为交易流水号，即TN，为商户后台从银联后台获取。
-         * mode —— 银联后台环境标识，“00”将在银联正式环境发起交易,“01”将在银联测试环境发起
-         * 交易seType —— 手机pay支付类别，见表1
-         */
-        return UPPayAssistEx.startPay(context, null, null, tn, env)
-//        if (aggregateModel == MODEL_NORMAL) { // 普通模式
-//            return UPPayAssistEx.startPay(context, null, null, tn, env)
-//        } else {
-//            val setype = PayBrand.getSeType()
-//            Log.d(TAG, "setype $setype")
-//            return UPPayAssistEx.startSEPay(context, null, null, tn, env, setype)
-//        }
+        return api.makeWxOrder(body)
     }
 
 
@@ -230,23 +194,31 @@ class WXPayViewModel : ViewModel() {
     /**
      * 跳转到微信小程序
      */
-    fun jumpWxApplet(context: Context, path: String,env:Int) {
-        val appId = "wxd930ea5d5a258f4f" // 填移动应用(App)的 AppId，非小程序的 AppID
+    fun jumpWxApplet(context: Context, path: String, miniprogramType: Int) {
+        val appId = Constant.WX_APP_ID // 填移动应用(App)的 AppId，非小程序的 AppID
 
         val api = WXAPIFactory.createWXAPI(context, appId)
         val req = WXLaunchMiniProgram.Req()
-        req.userName = "gh_d43f693ca31f" // 填小程序原始id
+        req.userName = Constant.WX_SOURCE_APP_ID // 填小程序原始id
 
         req.path = path ////拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
 
-        req.miniprogramType = env // 可选打开 开发版，体验版和正式版
+        req.miniprogramType = miniprogramType // 可选打开 开发版，体验版和正式版
 
         api.sendReq(req)
     }
 
-
-    fun onResp(resp: BaseResp) {
-
+    /**
+     * 查询订单
+     */
+    private suspend fun queryOrder(orderReq: QueryPayOrderReq): ResultData<QueryPayOrderRes> {
+        Log.d(TAG, "queryOrder $orderReq")
+        val json: MediaType = MediaType.parse("application/json; charset=utf-8")!!
+        orderReq.request_time = mSimpleDateFormat.format(Date())
+        val gson = Gson()
+        val orderJson = gson.toJson(orderReq)
+        Log.d(TAG, "orderJson $orderJson")
+        val body = RequestBody.create(json, orderJson)
+        return api.queryWxOrder(body)
     }
-
 }

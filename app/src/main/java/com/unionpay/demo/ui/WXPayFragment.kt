@@ -19,11 +19,13 @@ import com.unionpay.demo.bean.Constant.Companion.ENV_PRODUCT
 import com.unionpay.demo.bean.Constant.Companion.ENV_TEST
 import com.unionpay.demo.bean.Constant.Companion.MERCHANT_NO_PRODUCT
 import com.unionpay.demo.bean.Constant.Companion.MERCHANT_NO_TEST
+import com.unionpay.demo.bean.MPCashierApplyReq
 import com.unionpay.demo.bean.OrderReq
+import com.unionpay.demo.bean.QueryPayOrderReq
 import kotlinx.android.synthetic.main.wx_pay_fragment.*
 
 /**
- * 支付界面
+ * 小程序支付界面
  */
 class WXPayFragment : Fragment() {
     private var mLoadingDialog: ProgressDialog? = null
@@ -65,7 +67,7 @@ class WXPayFragment : Fragment() {
                 mLoadingDialog = ProgressDialog.show(
                     context,  // context
                     "",  // title
-                    "正在努力的获取tn中,请稍候...",  // message
+                    "正在下单,请稍候...",  // message
                     true
                 ) // 进度是否是不确定的，这只和创建进度条有关
             } else {
@@ -153,16 +155,12 @@ class WXPayFragment : Fragment() {
                 return@setOnClickListener
             }
 
-
-            val orderReq = OrderReq()
-//            orderReq.aggregateModel = aggregateModel
+            val orderReq = MPCashierApplyReq()
             orderReq.amount = amount
-//            orderReq.ebankEnAbbr = ebankEnAbbr
-            orderReq.ebankType = "02"
-            orderReq.merchOrderNo = "${System.currentTimeMillis()}"
-            orderReq.merchantNo = merchantNo
-            orderReq.requestNo = "${System.currentTimeMillis()}"
-            mViewModel?.pay(context!!, orderReq, env)
+            orderReq.merch_order_no = "${System.currentTimeMillis()}"
+            orderReq.merchant_no = merchantNo
+            orderReq.request_no = "${System.currentTimeMillis()}"
+            mViewModel?.pay(context!!, orderReq, miniprogramType)
         }
     }
 }

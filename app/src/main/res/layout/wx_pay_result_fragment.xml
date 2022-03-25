@@ -116,6 +116,7 @@
         android:layout_marginTop="10dp">
 
         <TextView
+            android:id="@+id/tv1"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="商户订单号:"
@@ -125,9 +126,12 @@
         <TextView
             android:id="@+id/tv_merchant_order_id"
             android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/tv1"
+            android:layout_marginLeft="5dp"
+            android:gravity="right"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/tv_copy_merchant_order_id"
-            android:text="XXXXXXXXX"
+            android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
             android:textColor="#000000"
             android:textSize="16sp" />
 
