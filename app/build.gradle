@@ -18,14 +18,37 @@ android {
         }
 
     }
-    buildTypes {
+
+    signingConfigs {
+        debug {
+            keyAlias 'unionpay'
+            keyPassword '12345678'
+            storeFile file('./libs/pay.keystore')
+            storePassword '12345678'
+        }
+
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            keyAlias 'unionpay'
+            keyPassword '12345678'
+            storeFile file('./libs/pay.keystore')
+            storePassword '12345678'
         }
     }
 
-    sourceSets.main{
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    sourceSets.main {
         jni.srcDirs = []
         jniLibs.srcDirs = ['libs']
     }
