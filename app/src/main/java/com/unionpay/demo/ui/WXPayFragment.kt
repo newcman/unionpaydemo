@@ -12,8 +12,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.payeco.wallet.R
 import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram
-import com.unionpay.demo.R
 import com.unionpay.demo.WXPayViewModel
 import com.unionpay.demo.bean.Constant.Companion.ENV_PRODUCT
 import com.unionpay.demo.bean.Constant.Companion.ENV_TEST
@@ -35,7 +35,7 @@ class WXPayFragment : Fragment() {
         )
     }
     private var miniprogramType =
-        WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_PREVIEW // 聚合模式：01-标准模式；02-直通模式
+        WXLaunchMiniProgram.Req.MINIPROGRAM_TYPE_PREVIEW
     private var env = ENV_TEST // 环境
 
     companion object {

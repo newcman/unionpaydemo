@@ -26,7 +26,7 @@ class Constant {
 
 
 
-        const val WX_APP_ID = ""
-        const val WX_SOURCE_APP_ID = "" // 小程序原始id
+        const val WX_APP_ID = "wx9807806353070dd0"
+        const val WX_SOURCE_APP_ID = "gh_9b54a64e0e1b" // 小程序原始id
     }
 }

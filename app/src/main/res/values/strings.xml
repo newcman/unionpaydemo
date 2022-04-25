@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UPPayDemo</string>
+    <string name="app_name">PayecoDemo</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="entryTitle">接入方式选择</string>

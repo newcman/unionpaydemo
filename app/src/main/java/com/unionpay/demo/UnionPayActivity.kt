@@ -6,10 +6,13 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.payeco.wallet.R
 import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY
 import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY_RESULT
 import com.unionpay.demo.ui.PayFragment
 import com.unionpay.demo.ui.PayResultFragment
+import java.lang.reflect.Proxy
+import kotlin.concurrent.thread
 
 /**
  * 银联支付
@@ -35,6 +38,18 @@ class UnionPayActivity : AppCompatActivity() {
 
         Log.d("mViewModel", "mViewModel $mViewModel")
         initViewModel()
+
+        Proxy.newProxyInstance(
+            classLoader, arrayOf(Runnable::class.java)
+        ) { proxy, method, args ->
+            {
+                Log.d("xs", "method ${method.name}")
+            }
+        }
+
+        thread {
+            Log.d("xs", "1111")
+        }
     }
 
     private fun initViewModel() {

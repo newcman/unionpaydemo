@@ -2,8 +2,14 @@ package com.unionpay.demo
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.payeco.wallet.R
 import kotlinx.android.synthetic.main.main_activity.*
+import java.lang.reflect.InvocationHandler
+import java.lang.reflect.Method
+import java.lang.reflect.Proxy
+import kotlin.concurrent.thread
 
 /**
  * 主界面

@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.payeco.wallet.R
 import com.unionpay.demo.PayViewModel
-import com.unionpay.demo.R
 import com.unionpay.demo.bean.Constant
 import kotlinx.android.synthetic.main.pay_result_fragment.*
 

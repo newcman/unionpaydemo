@@ -12,8 +12,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.payeco.wallet.R
 import com.unionpay.demo.PayViewModel
-import com.unionpay.demo.R
 import com.unionpay.demo.bean.Constant.Companion.ENV_PRODUCT
 import com.unionpay.demo.bean.Constant.Companion.ENV_TEST
 import com.unionpay.demo.bean.Constant.Companion.MERCHANT_NO_PRODUCT

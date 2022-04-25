@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.unionpay.demo.R
+import com.payeco.wallet.R
 import com.unionpay.demo.WXPayViewModel
 import com.unionpay.demo.bean.Constant
 import kotlinx.android.synthetic.main.pay_result_fragment.*

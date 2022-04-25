@@ -39,7 +39,7 @@ import java.util.*
  */
 class WXPayViewModel : ViewModel() {
     companion object {
-        private const val TAG = "PayViewModel"
+        private const val TAG = "WXPayViewModel"
     }
 
     val loadingLiveData: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -93,16 +93,16 @@ class WXPayViewModel : ViewModel() {
                 Toast.makeText(context, "获取到的url为空", Toast.LENGTH_LONG).show()
                 return@launch
             }
-//            jumpWxApplet(context, url!!, miniprogramType)
+            jumpWxApplet(context, url!!, miniprogramType)
 
-            val queryReq = QueryPayOrderReq()
-            queryReq.merchant_no = orderReq.merchant_no
-            queryReq.mer_order_no = orderReq.merch_order_no
-            queryReq.request_no = "${System.currentTimeMillis()}"
-            val queryResult = queryOrder(queryReq)
-            Log.d(TAG, "queryResult $queryResult")
-            payResult = queryResult.data?.pay_status ?: PAY_SUCCESS
-            pageLiveData.value = PAGE_PAY_RESULT
+//            val queryReq = QueryPayOrderReq()
+//            queryReq.merchant_no = orderReq.merchant_no
+//            queryReq.mer_order_no = orderReq.merch_order_no
+//            queryReq.request_no = "${System.currentTimeMillis()}"
+//            val queryResult = queryOrder(queryReq)
+//            Log.d(TAG, "queryResult $queryResult")
+//            payResult = queryResult.data?.pay_status ?: PAY_SUCCESS
+//            pageLiveData.value = PAGE_PAY_RESULT
 
         }
     }
@@ -198,6 +198,10 @@ class WXPayViewModel : ViewModel() {
         val appId = Constant.WX_APP_ID // 填移动应用(App)的 AppId，非小程序的 AppID
 
         val api = WXAPIFactory.createWXAPI(context, appId)
+        if (!api.isWXAppInstalled) {
+            Toast.makeText(context, "微信未安装，请先安装微信", Toast.LENGTH_LONG).show()
+            return
+        }
         val req = WXLaunchMiniProgram.Req()
         req.userName = Constant.WX_SOURCE_APP_ID // 填小程序原始id
 

@@ -6,7 +6,7 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "com.unionpay.demo"
+        applicationId "com.payeco.wallet"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
