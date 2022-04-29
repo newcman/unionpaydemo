@@ -61,8 +61,8 @@ class WXPayActivity : AppCompatActivity() {
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        mViewModel?.onPayResult(data)
+    override fun onResume() {
+        super.onResume()
+        mViewModel?.queryPayResult()
     }
 }

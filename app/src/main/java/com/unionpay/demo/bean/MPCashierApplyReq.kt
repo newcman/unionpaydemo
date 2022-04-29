@@ -10,7 +10,8 @@ class MPCashierApplyReq {
     var merchant_no = "" // 商户号
     var request_no = "" // 求流水号 必填
     var request_time = ""  // 请求时间(yyyyMMddHHmmss) 必填
+    var order_desc = "" // 订单描述
     override fun toString(): String {
-        return "MPCashierApplyReq(amount=$amount, entry_type='$entry_type', merch_order_no='$merch_order_no', merchant_no='$merchant_no', request_no='$request_no', request_time='$request_time')"
+        return "MPCashierApplyReq(amount=$amount, entry_type='$entry_type', merch_order_no='$merch_order_no', merchant_no='$merchant_no', request_no='$request_no', request_time='$request_time', order_desc='$order_desc')"
     }
 }

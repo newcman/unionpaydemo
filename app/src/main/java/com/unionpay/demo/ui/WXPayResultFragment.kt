@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.payeco.wallet.R
 import com.unionpay.demo.WXPayViewModel
 import com.unionpay.demo.bean.Constant
+import com.unionpay.demo.bean.QueryPayOrderRes
 import kotlinx.android.synthetic.main.pay_result_fragment.*
 import kotlinx.android.synthetic.main.pay_result_fragment.bt_back
 import kotlinx.android.synthetic.main.pay_result_fragment.iv_pay_result
@@ -47,43 +48,59 @@ class WXPayResultFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        Log.d("mViewModel", "mViewModel $mViewModel")
+        Log.d("WXPayResultFragment", "mViewModel $mViewModel")
         initView()
     }
 
     private fun initView() {
         bt_back.setOnClickListener {
-            mViewModel.back()
+            if (mViewModel.payResult == QueryPayOrderRes.PayStatus.PAYING) {
+                mViewModel.queryPayResult()
+            } else {
+                mViewModel.back()
+            }
         }
 
         tv_copy_merchant_order_id.setOnClickListener {
             Toast.makeText(context, "复制成功", Toast.LENGTH_LONG).show()
-           val clipboardManager =  context!!.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-            clipboardManager?.setPrimaryClip(ClipData.newPlainText("商户订单号", tv_merchant_order_id.text.toString()))
+            val clipboardManager =
+                context!!.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+            clipboardManager?.setPrimaryClip(
+                ClipData.newPlainText(
+                    "商户订单号",
+                    tv_merchant_order_id.text.toString()
+                )
+            )
         }
 
         tv_copy_yilian_orderr_id.setOnClickListener {
             Toast.makeText(context, "复制成功", Toast.LENGTH_LONG).show()
-            val clipboardManager =  context!!.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
-            clipboardManager?.setPrimaryClip(ClipData.newPlainText("易联订单号", tv_yilian_order_id.text.toString()))
+            val clipboardManager =
+                context!!.getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+            clipboardManager?.setPrimaryClip(
+                ClipData.newPlainText(
+                    "易联订单号",
+                    tv_yilian_order_id.text.toString()
+                )
+            )
         }
 
         mViewModel.apply {
             when (payResult) {
-                Constant.PAY_SUCCESS -> {
+                QueryPayOrderRes.PayStatus.PAY_SUCCESS -> {
+                    bt_back.text = "返回"
                     iv_pay_result.setImageResource(R.mipmap.icon_pay_ok)
-                    tv_pay_result.text = "支付成功"
                 }
-                Constant.PAY_FAILED -> {
-                    iv_pay_result.setImageResource(R.mipmap.icon_pay_failed)
-                    tv_pay_result.text = "支付失败"
+                QueryPayOrderRes.PayStatus.PAYING -> {
+                    bt_back.text = "查询支付结果"
+                    iv_pay_result.setImageResource(R.mipmap.icon_pay_ok)
                 }
-                Constant.PAY_CANCEL -> {
+                else -> {
+                    bt_back.text = "返回"
                     iv_pay_result.setImageResource(R.mipmap.icon_pay_failed)
-                    tv_pay_result.text = "支付取消"
                 }
             }
-
+            tv_pay_result.text = payResult.desc
 
             var amount = orderReq?.amount ?: 0F
 

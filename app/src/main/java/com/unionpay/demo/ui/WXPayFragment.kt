@@ -160,6 +160,7 @@ class WXPayFragment : Fragment() {
             orderReq.merch_order_no = "${System.currentTimeMillis()}"
             orderReq.merchant_no = merchantNo
             orderReq.request_no = "${System.currentTimeMillis()}"
+            orderReq.order_desc = orderDesc
             mViewModel?.pay(context!!, orderReq, miniprogramType)
         }
     }

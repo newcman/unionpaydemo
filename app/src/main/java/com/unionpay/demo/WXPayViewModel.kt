@@ -49,7 +49,7 @@ class WXPayViewModel : ViewModel() {
     private val mSimpleDateFormat = SimpleDateFormat("yyyyMMddHHmmss")
     var orderRes: MPCashierApplyRes? = null
     var orderReq: MPCashierApplyReq? = null
-    var payResult = PAY_SUCCESS
+    var payResult = QueryPayOrderRes.PayStatus.NOT_PAY
 
     init {
         val okHttpClient = OkHttpClient.Builder().sslSocketFactory(
@@ -94,16 +94,6 @@ class WXPayViewModel : ViewModel() {
                 return@launch
             }
             jumpWxApplet(context, url!!, miniprogramType)
-
-//            val queryReq = QueryPayOrderReq()
-//            queryReq.merchant_no = orderReq.merchant_no
-//            queryReq.mer_order_no = orderReq.merch_order_no
-//            queryReq.request_no = "${System.currentTimeMillis()}"
-//            val queryResult = queryOrder(queryReq)
-//            Log.d(TAG, "queryResult $queryResult")
-//            payResult = queryResult.data?.pay_status ?: PAY_SUCCESS
-//            pageLiveData.value = PAGE_PAY_RESULT
-
         }
     }
 
@@ -119,75 +109,30 @@ class WXPayViewModel : ViewModel() {
         return api.makeWxOrder(body)
     }
 
-
-    fun onPayResult(data: Intent?) {
-        /*************************************************
-         * 步骤3：处理银联手机支付控件返回的支付结果
-         ************************************************/
-        /*************************************************
-         * 步骤3：处理银联手机支付控件返回的支付结果
-         */
-        if (data == null) {
-            payResult = PAY_FAILED
-            pageLiveData.value = PAGE_PAY_RESULT
-            return
-        }
-
-        var msg = ""
-        /*
-         * 支付控件返回字符串:success、fail、cancel 分别代表支付成功，支付失败，支付取消
-         */
-        /*
-         * 支付控件返回字符串:success、fail、cancel 分别代表支付成功，支付失败，支付取消
-         */
-        val str = data.extras!!.getString("pay_result")
-        Log.d(TAG, "onPayResult $str")
-        when {
-            str.equals("success", ignoreCase = true) -> {
-                // 如果想对结果数据验签，可使用下面这段代码，但建议不验签，直接去商户后台查询交易结果
-                // result_data结构见c）result_data参数说明
-                if (data.hasExtra("result_data")) {
-                    val result = data.extras!!.getString("result_data")
-                    try {
-                        val resultJson = JSONObject(result)
-                        val sign = resultJson.getString("sign")
-                        val dataOrg = resultJson.getString("data")
-
-                        Log.d(TAG, "onPayResult sign=$str , dataOrg=$data")
-                        // 此处的verify建议送去商户后台做验签
-                        // 如要放在手机端验，则代码必须支持更新证书
-                        //                    val ret: Boolean = verify(dataOrg, sign, mMode)
-                        //                    msg = if (ret) {
-                        //                        // 验签成功，显示支付结果
-                        //                        "支付成功！"
-                        //                    } else {
-                        //                        // 验签失败
-                        //                        "支付失败！"
-                        //                    }
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
-                }
-                // 结果result_data为成功时，去商户后台查询一下再展示成功
-                msg = "支付成功！"
-                payResult = PAY_SUCCESS
-            }
-            str.equals("fail", ignoreCase = true) -> {
-                msg = "支付失败！"
-                payResult = PAY_FAILED
-            }
-            str.equals("cancel", ignoreCase = true) -> {
-                msg = "用户取消了支付"
-                payResult = PAY_CANCEL
+    /**
+     * 结果界面
+     */
+    fun queryPayResult() {
+        orderReq?.apply {
+            Log.d(TAG, "onPayResult $orderReq")
+            viewModelScope.launch {
+                val queryReq = QueryPayOrderReq()
+                queryReq.merchant_no = merchant_no
+                queryReq.mer_order_no = merch_order_no
+                queryReq.request_no = "${System.currentTimeMillis()}"
+                val queryResult = queryOrder(queryReq)
+                Log.d(TAG, "queryResult $queryResult")
+                payResult = QueryPayOrderRes.PayStatus.of(queryResult.data?.pay_status)
+                pageLiveData.value = PAGE_PAY_RESULT
             }
         }
-        pageLiveData.value = PAGE_PAY_RESULT
     }
 
     /**
      * 返回
      */
     fun back() {
+        orderReq = null
         pageLiveData.value = PAGE_PAY
     }
 
