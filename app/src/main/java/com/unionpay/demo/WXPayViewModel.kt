@@ -143,10 +143,10 @@ class WXPayViewModel : ViewModel() {
         val appId = Constant.WX_APP_ID // 填移动应用(App)的 AppId，非小程序的 AppID
 
         val api = WXAPIFactory.createWXAPI(context, appId)
-        if (!api.isWXAppInstalled) {
-            Toast.makeText(context, "微信未安装，请先安装微信", Toast.LENGTH_LONG).show()
-            return
-        }
+//        if (!api.isWXAppInstalled) {
+//            Toast.makeText(context, "微信未安装，请先安装微信", Toast.LENGTH_LONG).show()
+//            return
+//        }
         val req = WXLaunchMiniProgram.Req()
         req.userName = Constant.WX_SOURCE_APP_ID // 填小程序原始id
 

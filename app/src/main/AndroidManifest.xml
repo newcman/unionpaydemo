@@ -42,11 +42,11 @@
         <activity android:name="com.unionpay.demo.WXPayActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.unionpay.demo.wxapi.WXEntryActivity"
+            android:name=".wxapi.WXEntryActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="true"
-            android:taskAffinity="com.unionpay.demo"
+            android:taskAffinity="com.payeco.wallet"
             android:launchMode="singleTask">
         </activity>
 <!--        <activity-->

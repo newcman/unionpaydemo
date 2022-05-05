@@ -1,4 +1,4 @@
-package com.unionpay.demo.wxapi
+package com.payeco.wallet.wxapi
 
 import android.app.Activity
 import android.content.Intent
