@@ -11,6 +11,7 @@ import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY
 import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY_RESULT
 import com.unionpay.demo.ui.PayFragment
 import com.unionpay.demo.ui.PayResultFragment
+import kotlinx.android.synthetic.main.wx_pay_activity.*
 import java.lang.reflect.Proxy
 import kotlin.concurrent.thread
 
@@ -38,17 +39,8 @@ class UnionPayActivity : AppCompatActivity() {
 
         Log.d("mViewModel", "mViewModel $mViewModel")
         initViewModel()
-
-        Proxy.newProxyInstance(
-            classLoader, arrayOf(Runnable::class.java)
-        ) { proxy, method, args ->
-            {
-                Log.d("xs", "method ${method.name}")
-            }
-        }
-
-        thread {
-            Log.d("xs", "1111")
+        iv_back.setOnClickListener {
+            finish()
         }
     }
 

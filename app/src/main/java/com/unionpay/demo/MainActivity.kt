@@ -1,15 +1,12 @@
 package com.unionpay.demo
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.payeco.wallet.R
 import kotlinx.android.synthetic.main.main_activity.*
-import java.lang.reflect.InvocationHandler
-import java.lang.reflect.Method
-import java.lang.reflect.Proxy
-import kotlin.concurrent.thread
+
 
 /**
  * 主界面
@@ -19,6 +16,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         initView()
+
+        tv_version.text = "Version ${getVersionName()}"
     }
 
     private fun initView() {
@@ -31,5 +30,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, WXPayActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun getVersionName(): String? {
+        try {
+            val pm: PackageManager = packageManager
+            val pi = pm.getPackageInfo(packageName, 0)
+            return pi.versionName
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return "1.0"
     }
 }
