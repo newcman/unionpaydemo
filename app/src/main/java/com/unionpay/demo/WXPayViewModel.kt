@@ -44,26 +44,45 @@ class WXPayViewModel : ViewModel() {
 
     val loadingLiveData: MutableLiveData<Boolean> = MutableLiveData(false)
     val pageLiveData: MutableLiveData<Int> = MutableLiveData(0)
-    private var retrofit: Retrofit
-    private var api: IOrderApi
+    private var retrofit: Retrofit? = null
+    private var api: IOrderApi? = null
     private val mSimpleDateFormat = SimpleDateFormat("yyyyMMddHHmmss")
     var orderRes: MPCashierApplyRes? = null
     var orderReq: MPCashierApplyReq? = null
     var payResult = QueryPayOrderRes.PayStatus.NOT_PAY
+    val okHttpClient = OkHttpClient.Builder().sslSocketFactory(
+        TrustAllSSLSocketFactory.newInstance(),
+        TrustAllSSLSocketFactory.TrustAllCertsManager()
+    )
 
-    init {
-        val okHttpClient = OkHttpClient.Builder().sslSocketFactory(
-            TrustAllSSLSocketFactory.newInstance(),
-            TrustAllSSLSocketFactory.TrustAllCertsManager()
-        )
+    /**
+     *
+     *<item>测试环境</item>
+    <item>开发环境</item>
+    <item>联调环境</item>
+    <item>生产环境</item>
+     * 开发环境地址：https://openapi.d.payeco.com/receipt-app-demo
+    测试环境地址：https://openapi.t.payeco.com/receipt-app-demo
+    联调环境地址：https://openapi.test.payeco.com/receipt-app-demo
+    生产环境地址：https://openapi.payeco.com/receipt-app-demo
+     */
+    fun initApi(env: Int) {
+        val baseUrl = when (env) {
+            0 -> "https://openapi.t.payeco.com/receipt-app-demo/"
+            1 -> "https://openapi.d.payeco.com/receipt-app-demo/"
+            2 -> "https://openapi.test.payeco.com/receipt-app-demo/"
+            else -> "https://openapi.payeco.com/receipt-app-demo/"
+        }
         retrofit = Retrofit.Builder()
-            .baseUrl("https://openapi.payeco.com")
+            .baseUrl(baseUrl)
             .client(okHttpClient.build())
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))//使用rxjava是加上这一句
             .build()
-        api = retrofit.create(IOrderApi::class.java)
+        api = retrofit?.create(IOrderApi::class.java)
+        Log.d(TAG, "initApi $baseUrl")
     }
+
 
     /**
      */
@@ -106,7 +125,7 @@ class WXPayViewModel : ViewModel() {
         val orderJson = gson.toJson(orderReq)
         Log.d(TAG, "orderJson $orderJson")
         val body = RequestBody.create(json, orderJson)
-        return api.makeWxOrder(body)
+        return api!!.makeWxOrder(body)
     }
 
     /**
@@ -168,6 +187,6 @@ class WXPayViewModel : ViewModel() {
         val orderJson = gson.toJson(orderReq)
         Log.d(TAG, "orderJson $orderJson")
         val body = RequestBody.create(json, orderJson)
-        return api.queryWxOrder(body)
+        return api!!.queryWxOrder(body)
     }
 }

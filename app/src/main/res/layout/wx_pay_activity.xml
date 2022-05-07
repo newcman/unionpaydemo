@@ -3,9 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="25dp"
+        android:src="@mipmap/ico_back"
+        android:layout_height="25dp"/>
     <TextView
         android:layout_width="match_parent"
         android:text="跳转支付-微信OpenSDK Demo"

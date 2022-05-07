@@ -88,7 +88,7 @@ class WXPayFragment : Fragment() {
             ) {
 
                 when (position) {
-                    2 -> {
+                    3 -> {
                         tv_merchant_id.setText(MERCHANT_NO_PRODUCT)
                         env = ENV_PRODUCT
                     }
@@ -97,6 +97,7 @@ class WXPayFragment : Fragment() {
                         env = ENV_TEST
                     }
                 }
+                mViewModel?.initApi(position)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -104,6 +105,7 @@ class WXPayFragment : Fragment() {
         }
 
         sp_applets_version.setSelection(1)
+        mViewModel?.initApi(1)
         // 小程序版本
         sp_applets_version.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(

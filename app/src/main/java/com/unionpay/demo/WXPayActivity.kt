@@ -11,6 +11,7 @@ import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY
 import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY_RESULT
 import com.unionpay.demo.ui.WXPayFragment
 import com.unionpay.demo.ui.WXPayResultFragment
+import kotlinx.android.synthetic.main.wx_pay_activity.*
 
 /**
  * 微信小程序支付
@@ -36,6 +37,9 @@ class WXPayActivity : AppCompatActivity() {
 
         Log.d("mViewModel", "mViewModel $mViewModel")
         initViewModel()
+        iv_back.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initViewModel() {
