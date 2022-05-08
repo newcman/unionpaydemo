@@ -46,8 +46,8 @@
                 android:textSize="18sp"
                 />
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_marginRight="25dp"
                 android:src="@mipmap/icon_arrow_gray" />
         </LinearLayout>
@@ -83,8 +83,8 @@
                 android:textSize="18sp"
                  />
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_marginRight="25dp"
                 android:src="@mipmap/icon_arrow_gray" />
         </LinearLayout>
