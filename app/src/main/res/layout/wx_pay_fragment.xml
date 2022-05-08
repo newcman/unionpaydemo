@@ -1,181 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_horizontal"
-    android:layout_marginLeft="30dp"
-    android:layout_marginRight="30dp"
-    android:orientation="vertical"
-    tools:context=".ui.PayFragment">
+    android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp">
+        android:background="@drawable/bg_white"
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center_vertical">
 
-            <TextView
+            <LinearLayout
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="#FF0000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="后台地址:"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/sp_env"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="*"
-                android:textColor="#FF0000" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="后台地址:"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:entries="@array/sp_envs1"
+                android:gravity="right"
+                android:spinnerMode="dropdown" />
         </LinearLayout>
 
-        <Spinner
-            android:id="@+id/sp_env"
+        <View
             android:layout_width="wrap_content"
-            android:gravity="right"
-            android:layout_height="wrap_content"
-            android:entries="@array/sp_envs1"
-            android:spinnerMode="dropdown"
-            android:layout_alignParentRight="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#818181" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:text="*"
-                android:textColor="#FF0000" />
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="#FF0000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="易联商户号:"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/tv_merchant_id"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="易联商户号:"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_alignParentRight="true"
+                android:background="#00000000"
+                android:gravity="left"
+                android:hint="请填写易联商户号"
+                android:singleLine="true"
+                android:textSize="15sp" />
         </LinearLayout>
-
-        <EditText
-            android:id="@+id/tv_merchant_id"
-            android:layout_width="200dp"
-            android:singleLine="true"
-            android:gravity="right"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#818181" />
         <LinearLayout
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:text="*"
-                android:textColor="#FF0000" />
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="#FF0000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="订单金额(元):"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/tv_order_amount"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="订单金额(元):"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_alignParentRight="true"
+                android:background="#00000000"
+                android:gravity="right"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:text="0.01"
+                android:textSize="15sp" />
         </LinearLayout>
-
-        <EditText
-            android:id="@+id/tv_order_amount"
-            android:layout_width="200dp"
-            android:text="0.01"
-            android:gravity="right"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:inputType="numberDecimal"
-            android:layout_alignParentRight="true" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#818181" />
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="*"
+                    android:textColor="#FF0000" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 订单描述:"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/tv_order_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:gravity="left"
+                android:hint="请输入订单描述，不多于20个字"
+                android:maxLength="20"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <View
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#818181" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:text="*"
-                android:textColor="#FF0000" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" 订单描述:"
+                android:layout_centerVertical="true"
+                android:text=" 小程序版本:"
                 android:textColor="#000000"
                 android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/sp_applets_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:entries="@array/sp_applets_version"
+                android:gravity="right"
+                android:spinnerMode="dropdown" />
         </LinearLayout>
-
-        <EditText
-            android:id="@+id/tv_order_desc"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:gravity="right"
-            android:maxLength="20"
-            android:text="测试支付" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:layout_centerVertical="true"
+        <View
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" 小程序版本:"
-            android:textColor="#000000"
-            android:textSize="16sp" />
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#818181" />
+    </LinearLayout>
 
-        <Spinner
-            android:id="@+id/sp_applets_version"
-            android:layout_width="wrap_content"
-            android:entries="@array/sp_applets_version"
-            android:spinnerMode="dropdown"
-            android:gravity="right"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true" />
-    </RelativeLayout>
-
-    <Button
+    <TextView
         android:id="@+id/bt_make_order"
-        android:layout_width="100dp"
+        android:layout_width="300dp"
         android:layout_height="40dp"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:background="@drawable/bg_button"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:text="确认下单" />

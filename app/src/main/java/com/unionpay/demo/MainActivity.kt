@@ -21,12 +21,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        bt_union_pay.setOnClickListener {
+        ll_union_pay.setOnClickListener {
             val intent = Intent(this, UnionPayActivity::class.java)
             startActivity(intent)
         }
 
-        bt_wx_pay.setOnClickListener {
+        ll_wx_pay.setOnClickListener {
             val intent = Intent(this, WXPayActivity::class.java)
             startActivity(intent)
         }

@@ -14,7 +14,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp">
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -166,10 +166,13 @@
             android:layout_alignParentRight="true" />
     </RelativeLayout>
 
-    <Button
+    <TextView
         android:id="@+id/bt_pay"
-        android:layout_width="100dp"
+        android:layout_width="300dp"
         android:layout_height="40dp"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:background="@drawable/bg_button"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:text="支付" />

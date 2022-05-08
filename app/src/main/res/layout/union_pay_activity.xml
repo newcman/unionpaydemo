@@ -3,24 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <ImageView
-        android:id="@+id/iv_back"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_width="25dp"
-        android:src="@mipmap/ico_back"
-        android:layout_height="25dp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:text="银联统一收银台支付Demo"
-        android:textColor="#000000"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        android:layout_height="wrap_content"/>
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="50dp">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_marginLeft="10dp"
+            android:layout_width="20dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ico_back"
+            android:layout_height="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:text="银联统一收银台支付Demo"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_gravity="right"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"

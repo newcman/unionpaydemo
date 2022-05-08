@@ -7,47 +7,99 @@
 
     <TextView
         android:id="@+id/tv_title"
-        android:text="易联演示demo"
-        android:textColor="#000000"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:text="易联演示Demo"
+        android:textColor="#181818"
+        android:textStyle="bold"
+        android:textSize="20sp" />
 
-    <Button
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tv_title"
-        android:id="@+id/bt_union_pay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:gravity="center"
-        android:text="银联统一收银台支付"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:background="#ffffff"
+        android:orientation="vertical">
 
-    <Button
-        android:layout_below="@+id/bt_union_pay"
-        android:id="@+id/bt_wx_pay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="跳转支付-微信OpenSDK"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        <LinearLayout
+            android:id="@+id/ll_union_pay"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="33dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/icon_union_logo" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="银联统一收银台支付"
+                android:textColor="#181818"
+                android:textSize="18sp"
+                />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="25dp"
+                android:src="@mipmap/icon_arrow_gray" />
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="wrap_content"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="20dp"
+            android:background="#818181" />
+
+        <LinearLayout
+            android:id="@+id/ll_wx_pay"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="33dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/icon_jump_logo" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="跳转支付-微信OpenSDK"
+                android:textColor="#181818"
+                android:textSize="18sp"
+                 />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="25dp"
+                android:src="@mipmap/icon_arrow_gray" />
+        </LinearLayout>
+    </LinearLayout>
 
 
     <TextView
         android:id="@+id/tv_version"
-        android:text="V 1.0.0"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        android:layout_marginBottom="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_marginBottom="30dp"
+        android:text="V 1.0.0"
+        android:textStyle="bold"
+        android:textColor="#818181"
+        android:textSize="20sp" />
 </RelativeLayout>

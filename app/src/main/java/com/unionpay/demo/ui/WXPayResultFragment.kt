@@ -93,7 +93,7 @@ class WXPayResultFragment : Fragment() {
                 }
                 QueryPayOrderRes.PayStatus.PAYING -> {
                     bt_back.text = "查询支付结果"
-                    iv_pay_result.setImageResource(R.mipmap.icon_pay_ok)
+                    iv_pay_result.setImageResource(R.mipmap.icon_paying)
                 }
                 else -> {
                     bt_back.text = "返回"

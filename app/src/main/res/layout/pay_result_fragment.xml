@@ -94,12 +94,16 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <Button
+    <TextView
         android:id="@+id/bt_back"
-        android:layout_width="120dp"
+        android:layout_width="300dp"
         android:layout_height="40dp"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:background="@drawable/bg_button"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:text="返回" />
+
 
 </LinearLayout>
