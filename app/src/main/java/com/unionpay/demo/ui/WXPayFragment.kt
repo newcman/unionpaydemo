@@ -104,8 +104,7 @@ class WXPayFragment : Fragment() {
             }
         }
 
-        sp_applets_version.setSelection(1)
-        mViewModel?.initApi(1)
+        sp_env.setSelection(0)
         // 小程序版本
         sp_applets_version.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(

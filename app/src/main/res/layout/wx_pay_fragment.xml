@@ -41,7 +41,7 @@
                 android:id="@+id/sp_env"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:entries="@array/sp_envs1"
+                android:entries="@array/sp_envs"
                 android:gravity="right"
                 android:spinnerMode="dropdown" />
         </LinearLayout>

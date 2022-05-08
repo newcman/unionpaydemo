@@ -22,6 +22,10 @@ import com.unionpay.demo.bean.Constant.Companion.MODEL_DIREC
 import com.unionpay.demo.bean.Constant.Companion.MODEL_NORMAL
 import com.unionpay.demo.bean.OrderReq
 import kotlinx.android.synthetic.main.pay_fragment.*
+import kotlinx.android.synthetic.main.pay_fragment.sp_env
+import kotlinx.android.synthetic.main.pay_fragment.tv_merchant_id
+import kotlinx.android.synthetic.main.pay_fragment.tv_order_amount
+import kotlinx.android.synthetic.main.wx_pay_fragment.*
 import java.lang.Exception
 
 /**
@@ -87,7 +91,7 @@ class PayFragment : Fragment() {
             ) {
 
                 when (position) {
-                    2 -> {
+                    3 -> {
                         tv_merchant_id.setText(MERCHANT_NO_PRODUCT)
                         env = ENV_PRODUCT
                     }
@@ -96,12 +100,14 @@ class PayFragment : Fragment() {
                         env = ENV_TEST
                     }
                 }
+                mViewModel?.initApi(position)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
 
+        sp_env.setSelection(0)
         //  聚合模式
         sp_mode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(

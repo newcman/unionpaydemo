@@ -46,30 +46,46 @@ class PayViewModel : ViewModel() {
 
     val loadingLiveData: MutableLiveData<Boolean> = MutableLiveData(false)
     val pageLiveData: MutableLiveData<Int> = MutableLiveData(0)
-    private var retrofit: Retrofit
-    private var api: IOrderApi
+    private var retrofit: Retrofit? = null
+    private var api: IOrderApi? = null
     private val mSimpleDateFormat = SimpleDateFormat("yyyyMMddHHmmss")
     var orderRes: OrderRes? = null
     var orderReq: OrderReq? = null
     var payResult = PAY_SUCCESS
 
-    val handler = CoroutineExceptionHandler { context, exception ->
-        Log.e(TAG, "error $exception")
-    }
+    val okHttpClient = OkHttpClient.Builder().sslSocketFactory(
+        TrustAllSSLSocketFactory.newInstance(),
+        TrustAllSSLSocketFactory.TrustAllCertsManager()
+    )
 
-    init {
-        val okHttpClient = OkHttpClient.Builder().sslSocketFactory(
-            TrustAllSSLSocketFactory.newInstance(),
-            TrustAllSSLSocketFactory.TrustAllCertsManager()
-        )
+    /**
+     *
+     *<item>测试环境</item>
+    <item>开发环境</item>
+    <item>联调环境</item>
+    <item>生产环境</item>
+     * 开发环境地址：https://openapi.d.payeco.com/receipt-app-demo
+    测试环境地址：https://openapi.t.payeco.com/receipt-app-demo
+    联调环境地址：https://openapi.test.payeco.com/receipt-app-demo
+    生产环境地址：https://openapi.payeco.com/receipt-app-demo
+     */
+    fun initApi(env: Int) {
+        val baseUrl = when (env) {
+            0 -> "https://openapi.t.payeco.com"
+            1 -> "https://openapi.d.payeco.com"
+            2 -> "https://openapi.test.payeco.com"
+            else -> "https://openapi.payeco.com"
+        }
         retrofit = Retrofit.Builder()
-            .baseUrl("https://openapi.payeco.com")
+            .baseUrl(baseUrl)
             .client(okHttpClient.build())
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))//使用rxjava是加上这一句
             .build()
-        api = retrofit.create(IOrderApi::class.java)
+        api = retrofit?.create(IOrderApi::class.java)
+        Log.d(TAG, "initApi $baseUrl")
     }
+
 
     /**
      * 支付
@@ -119,7 +135,7 @@ class PayViewModel : ViewModel() {
         val orderJson = gson.toJson(orderReq)
         Log.d(TAG, "orderJson $orderJson")
         val body = RequestBody.create(json, orderJson)
-        return api.makeOrder(body)
+        return api!!.makeOrder(body)
     }
 
     /**

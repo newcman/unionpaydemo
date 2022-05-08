@@ -11,12 +11,6 @@
     <string-array name="sp_envs">
         <item>测试环境</item>
         <item>开发环境</item>
-        <item>生产环境</item>
-    </string-array>
-
-    <string-array name="sp_envs1">
-        <item>测试环境</item>
-        <item>开发环境</item>
         <item>联调环境</item>
         <item>生产环境</item>
     </string-array>

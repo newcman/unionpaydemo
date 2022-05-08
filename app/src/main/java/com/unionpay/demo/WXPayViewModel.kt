@@ -1,7 +1,6 @@
 package com.unionpay.demo
 
 import android.content.Context
-import android.content.Intent
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
@@ -15,9 +14,6 @@ import com.unionpay.demo.api.IOrderApi
 import com.unionpay.demo.bean.*
 import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY
 import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY_RESULT
-import com.unionpay.demo.bean.Constant.Companion.PAY_CANCEL
-import com.unionpay.demo.bean.Constant.Companion.PAY_FAILED
-import com.unionpay.demo.bean.Constant.Companion.PAY_SUCCESS
 import com.unionpay.demo.bean.Constant.Companion.RESULT_OK
 import com.unionpay.demo.ssl.TrustAllSSLSocketFactory
 import io.reactivex.schedulers.Schedulers
@@ -25,8 +21,6 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
-import org.json.JSONException
-import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -68,10 +62,10 @@ class WXPayViewModel : ViewModel() {
      */
     fun initApi(env: Int) {
         val baseUrl = when (env) {
-            0 -> "https://openapi.t.payeco.com/receipt-app-demo/"
-            1 -> "https://openapi.d.payeco.com/receipt-app-demo/"
-            2 -> "https://openapi.test.payeco.com/receipt-app-demo/"
-            else -> "https://openapi.payeco.com/receipt-app-demo/"
+            0 -> "https://openapi.t.payeco.com"
+            1 -> "https://openapi.d.payeco.com"
+            2 -> "https://openapi.test.payeco.com"
+            else -> "https://openapi.payeco.com"
         }
         retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -162,10 +156,10 @@ class WXPayViewModel : ViewModel() {
         val appId = Constant.WX_APP_ID // 填移动应用(App)的 AppId，非小程序的 AppID
 
         val api = WXAPIFactory.createWXAPI(context, appId)
-//        if (!api.isWXAppInstalled) {
-//            Toast.makeText(context, "微信未安装，请先安装微信", Toast.LENGTH_LONG).show()
-//            return
-//        }
+        if (!api.isWXAppInstalled) {
+            Toast.makeText(context, "微信未安装，请先安装微信", Toast.LENGTH_LONG).show()
+            return
+        }
         val req = WXLaunchMiniProgram.Req()
         req.userName = Constant.WX_SOURCE_APP_ID // 填小程序原始id
 
