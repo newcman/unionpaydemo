@@ -20,6 +20,7 @@
         <package android:name="com.unionpay.tsmservice.mi" />
         <package android:name="com.huawei.wallet" />
         <package android:name="com.tencent.mm" />
+        <package android:name="cmb.pb" />
     </queries>
 
     <application
