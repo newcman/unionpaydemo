@@ -24,4 +24,12 @@
         <item>体验版</item>
         <item>正式版</item>
     </string-array>
+    <string-array name="sp_banks">
+        <item>工商银行</item>
+        <item>建设银行</item>
+    </string-array>
+
+    <string-array name="sp_pay_channel">
+        <item>手机应用程序03</item>
+    </string-array>
 </resources>

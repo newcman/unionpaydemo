@@ -66,7 +66,7 @@
             android:required="false" />
 
         <activity
-            android:name="com.unionpay.uppay.PayActivity"
+            android:name="com.unionpay.demo.PayActivity"
             android:configChanges="orientation|keyboardHidden"
             android:excludeFromRecents="true"
             android:label="@string/app_name"
@@ -76,7 +76,20 @@
             android:name="com.unionpay.UPPayWapActivity"
             android:configChanges="orientation|keyboardHidden|fontScale"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name="com.ccb.ifpaysdk.activity.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.ccb.ifpaysdk.activity.ResultActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <!-- 替换你的THIRDAPPINFO 详情参看 《跳转至建行WEB网关下单接口v2.2》-->
+                <action android:name="你上传SDK的THIRDAPPINFO的值"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
 
     </application>
 

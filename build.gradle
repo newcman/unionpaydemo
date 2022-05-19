@@ -33,6 +33,9 @@ buildscript {
 
 allprojects {
     repositories {
+        maven{
+            url "https://bintray.com/wechat-sdk-team/maven"  //配置仓库即可
+        }
         mavenLocal()
         google()
         jcenter()

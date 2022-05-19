@@ -16,6 +16,7 @@ import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY
 import com.unionpay.demo.bean.Constant.Companion.PAGE_PAY_RESULT
 import com.unionpay.demo.bean.Constant.Companion.RESULT_OK
 import com.unionpay.demo.ssl.TrustAllSSLSocketFactory
+import com.unionpay.demo.vm.PayStatus
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
@@ -43,7 +44,7 @@ class WXPayViewModel : ViewModel() {
     private val mSimpleDateFormat = SimpleDateFormat("yyyyMMddHHmmss")
     var orderRes: MPCashierApplyRes? = null
     var orderReq: MPCashierApplyReq? = null
-    var payResult = QueryPayOrderRes.PayStatus.NOT_PAY
+    var payResult = PayStatus.NOT_PAY
     val okHttpClient = OkHttpClient.Builder().sslSocketFactory(
         TrustAllSSLSocketFactory.newInstance(),
         TrustAllSSLSocketFactory.TrustAllCertsManager()
@@ -135,7 +136,7 @@ class WXPayViewModel : ViewModel() {
                 queryReq.request_no = "${System.currentTimeMillis()}"
                 val queryResult = queryOrder(queryReq)
                 Log.d(TAG, "queryResult $queryResult")
-                payResult = QueryPayOrderRes.PayStatus.of(queryResult.data?.pay_status)
+                payResult = PayStatus.of(queryResult.data?.pay_status)
                 pageLiveData.value = PAGE_PAY_RESULT
             }
         }

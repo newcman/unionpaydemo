@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, WXPayActivity::class.java)
             startActivity(intent)
         }
+
+        ll_online_bank.setOnClickListener {
+            PayActivity.startPayActivity(this, PayActivity.CHANNEL_ONLINE_BANK)
+        }
     }
 
     private fun getVersionName(): String? {

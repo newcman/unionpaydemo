@@ -12,9 +12,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.payeco.wallet.R
+import com.unionpay.demo.PayViewModel
 import com.unionpay.demo.WXPayViewModel
 import com.unionpay.demo.bean.Constant
 import com.unionpay.demo.bean.QueryPayOrderRes
+import com.unionpay.demo.vm.BaseViewModel
 import com.unionpay.demo.vm.PayStatus
 import kotlinx.android.synthetic.main.pay_result_fragment.*
 import kotlinx.android.synthetic.main.pay_result_fragment.bt_back
@@ -27,38 +29,34 @@ import kotlinx.android.synthetic.main.wx_pay_result_fragment.*
 /**
  * 支付结果界面
  */
-class WXPayResultFragment : Fragment() {
-    private val mViewModel: WXPayViewModel by lazy {
-        ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(
-            WXPayViewModel::class.java
-        )
+abstract class BasePayResultFragment : Fragment() {
+    private companion object {
+        private const val TAG = "BasePayResultFragment"
     }
 
-    companion object {
-        fun newInstance(): WXPayResultFragment {
-            return WXPayResultFragment()
-        }
-    }
+    var mViewModel: BaseViewModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.wx_pay_result_fragment, container, false)
+        return inflater.inflate(getLayoutID(), container, false)
     }
+
+    abstract fun getLayoutID(): Int
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        Log.d("WXPayResultFragment", "mViewModel $mViewModel")
+        Log.d(TAG, "mViewModel $mViewModel")
         initView()
     }
 
     private fun initView() {
         bt_back.setOnClickListener {
-            if (mViewModel.payResult == PayStatus.PAYING) {
-                mViewModel.queryPayResult()
+            if (mViewModel?.payResult == PayStatus.PAYING) {
+                mViewModel?.queryPayResult()
             } else {
-                mViewModel.back()
+                mViewModel?.back()
             }
         }
 
@@ -86,7 +84,7 @@ class WXPayResultFragment : Fragment() {
             )
         }
 
-        mViewModel.apply {
+        mViewModel?.apply {
             when (payResult) {
                 PayStatus.PAY_SUCCESS -> {
                     bt_back.text = "返回"
@@ -103,18 +101,12 @@ class WXPayResultFragment : Fragment() {
             }
             tv_pay_result.text = payResult.desc
 
-            var amount = orderReq?.amount ?: 0F
-
-            orderRes?.apply {
+            orderInfo?.apply {
                 tv_order_amount?.text = String.format("%.2f", amount) + "元"
-                tv_yilian_order_id.text = merch_order_no
-                tv_merchant_order_id.text = order_no
-            }
-
-            orderReq?.apply {
-                tv_merchant_id.text = merchant_no
+                tv_yilian_order_id.text = ylOrderNo
+                tv_merchant_order_id.text = merchOrderNo
+                tv_merchant_id.text = ylNo
             }
         }
     }
-
 }
